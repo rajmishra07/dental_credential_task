@@ -1,0 +1,502 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #11468f;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action  px-3">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action " style="font-size:16px; margin-left: 1px;">
+        <i class="fa-solid fa-truck-ramp-box me-3 "style="font-size:16px;"></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 p-2 mx-4">
+    <h2 class="fw-bold">
+      DOCTOR PROFILE
+      <i class="fas fa-info-circle"></i>
+      <hr style="width: 30%;">
+    </h2>
+    <h5 class="mt-4 fw-bold fs-1"><%= @doctor.full_name %></h5>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Personal(0)', edit_personal_doctor_path(@doctor), class: "btn1 btn btn-grey" %>
+        <%= link_to 'Education(0)', '#', onclick: "saveAndNavigate('#{edit_education_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Offices(0)','#', onclick: "saveAndNavigate('#{edit_office_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Work History(0)', '#', onclick: "saveAndNavigate('#{edit_work_history_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        
+        <%= link_to 'Liability(0)','#', onclick: "saveAndNavigate('#{edit_liability_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Disclosure(0)', '#', onclick: "saveAndNavigate('#{edit_disclosure_doctor_path(@doctor)}')", class: "btn1 btn btn-blue" %>
+        <button class="btn1 btn-grey">Save</button>
+      </div>
+    </div>
+    <div class="row border mt-3 mb-3 fw-bold m-1">
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="mt-4 col-sm-2">
+          <button class=" btn1 btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="collapseExample">
+          COLLAPSE ALL
+          </button>
+        </div>
+      </div>
+      <div class="p-3">
+      	<div id="collapsePersonalInfo" class="collapse show">
+	        <%= form_with(model: @doctor, local: true, html: { class: "form-border", id: "personal-form" }) do |form| %>
+	          <div class="col-md-12  border-direction">
+	            <fieldset class="border pixel-2">
+	              <div class="row grey-head margin-heading border-direction1 ">
+	                <legend class="w-auto fs-6 py-1 ">Licensure Detail:Answer only Yes or No ,do not use N/A</legend>
+	              </div>              
+	              <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :license_relinquished, "1. Has your license, registration or certification to practice in your<br> profession ever been voluntarily or involuntarily relinquished,<br> denied, suspended, revoked, or restricted?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :license_relinquished, true, id: "license_relinquished_yes", class: "form-check-input" %>
+								      <%= form.label :license_relinquished, "Yes", class: "form-check-label", for: "license_relinquished_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :license_relinquished, false, id: "license_relinquished_no", class: "form-check-input" %>
+								      <%= form.label :license_relinquished, "No", class: "form-check-label", for: "license_relinquished_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :license_relinquished, nil, id: "license_relinquished_na", class: "form-check-input" %>
+								      <%= form.label :license_relinquished, "N/A", class: "form-check-label", for: "license_relinquished_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+	              <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :membership_voluntarily_relinquished, "2. Have you ever voluntarily relinquished membership status and/or<br> clinical privileges at any hospital or institution?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :membership_voluntarily_relinquished, true, id: "membership_voluntarily_relinquished_yes", class: "form-check-input" %>
+								      <%= form.label :membership_voluntarily_relinquished, "Yes", class: "form-check-label", for: "membership_voluntarily_relinquished_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :membership_voluntarily_relinquished, false, id: "membership_voluntarily_relinquished_no", class: "form-check-input" %>
+								      <%= form.label :membership_voluntarily_relinquished, "No", class: "form-check-label", for: "membership_voluntarily_relinquished_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :membership_voluntarily_relinquished, nil, id: "membership_voluntarily_relinquished_na", class: "form-check-input" %>
+								      <%= form.label :membership_voluntarily_relinquished, "N/A", class: "form-check-label", for: "membership_voluntarily_relinquished_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :dea_certificates_denied, "3. Have your DEA and/or DPS controlled substances <br> certificates or authorization(s) ever been denied, suspended,<br> revoked, restricted, denied renewal, or voluntarily relinquished?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :dea_certificates_denied, true, id: "dea_certificates_denied_yes", class: "form-check-input" %>
+								      <%= form.label :dea_certificates_denied, "Yes", class: "form-check-label", for: "dea_certificates_denied_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :dea_certificates_denied, false, id: "dea_certificates_denied_no", class: "form-check-input" %>
+								      <%= form.label :dea_certificates_denied, "No", class: "form-check-label", for: "dea_certificates_denied_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :dea_certificates_denied, nil, id: "dea_certificates_denied_na", class: "form-check-input" %>
+								      <%= form.label :dea_certificates_denied, "N/A", class: "form-check-label", for: "dea_certificates_denied_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :board_certification_suspended, "4. Has your board certification or any hospital privilege ever been<br> suspended, revoked or restricted?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :board_certification_suspended, true, id: "board_certification_suspended_yes", class: "form-check-input" %>
+								      <%= form.label :board_certification_suspended, "Yes", class: "form-check-label", for: "board_certification_suspended_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :board_certification_suspended, false, id: "board_certification_suspended_no", class: "form-check-input" %>
+								      <%= form.label :board_certification_suspended, "No", class: "form-check-label", for: "board_certification_suspended_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :board_certification_suspended, nil, id: "board_certification_suspended_na", class: "form-check-input" %>
+								      <%= form.label :board_certification_suspended, "N/A", class: "form-check-label", for: "board_certification_suspended_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :clinical_privileges_denied, "5. Have you ever been privileges pr medical staff membership at any<br> hospital or healthcare institution,voluntarily or involuntarily,<br> ever been denied, suspended ,revoked,restricted,denied renewal or<br> subject to probationary or to other disciplinary conditions(for<br> reasons other than non-completion of medical record when<br> quality of care was not adversely affected) oe have proceedigs<br> towards any of those ends been instituted or recommended by any<br> hospital or healthcare institution,medical staff or committee, or<br> governing board?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :clinical_privileges_denied, true, id: "clinical_privileges_denied_yes", class: "form-check-input" %>
+								      <%= form.label :clinical_privileges_denied, "Yes", class: "form-check-label", for: "clinical_privileges_denied_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :clinical_privileges_denied, false, id: "clinical_privileges_denied_no", class: "form-check-input" %>
+								      <%= form.label :clinical_privileges_denied, "No", class: "form-check-label", for: "clinical_privileges_denied_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :clinical_privileges_denied, nil, id: "clinical_privileges_denied_na", class: "form-check-input" %>
+								      <%= form.label :clinical_privileges_denied, "N/A", class: "form-check-label", for: "clinical_privileges_denied_na" %>
+								    </div>
+								  </div>
+								</div>
+	            </fieldset>
+
+	            <fieldset class="border pixel-2">
+	              <div class="row grey-head margin-heading">
+	                <legend class="w-auto  fs-6 py-1">Participation: Medicare,Medicaid,or other Government program</legend>
+	              </div>
+
+	              <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :ever_been_disciplined, "6. Have you ever been disciplined or excluded from,debarred,<br>suspended,reprimanded,sanctioned,censured,disqulified or <br>
+								  otherwise restricted in regard to participation in the medicare or<br> medicaid program,or in regard to other federal or state<br>governmental healthcare plans or programs?**".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :ever_been_disciplined, true, id: "ever_been_disciplined_yes", class: "form-check-input" %>
+								      <%= form.label :ever_been_disciplined, "Yes", class: "form-check-label", for: "ever_been_disciplined_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :ever_been_disciplined, false, id: "ever_been_disciplined_no", class: "form-check-input" %>
+								      <%= form.label :ever_been_disciplined, "No", class: "form-check-label", for: "ever_been_disciplined_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :ever_been_disciplined, nil, id: "ever_been_disciplined_na", class: "form-check-input" %>
+								      <%= form.label :ever_been_disciplined, "N/A", class: "form-check-label", for: "ever_been_disciplined_na" %>
+								    </div>
+								  </div>
+								</div>
+	            </fieldset>
+	            <fieldset class="border">
+					    	<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Sanctions or Investigations</legend>
+					      </div>
+					      <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :dea_or_state_suspended, "7.DEA or state controlled substances license suspended or revoked<br> ever?*".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :dea_or_state_suspended, true, id: "dea_or_state_suspended_yes", class: "form-check-input" %>
+								      <%= form.label :dea_or_state_suspended, "Yes", class: "form-check-label", for: "dea_or_state_suspended_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :dea_or_state_suspended, false, id: "dea_or_state_suspended_no", class: "form-check-input" %>
+								      <%= form.label :dea_or_state_suspended, "No", class: "form-check-label", for: "dea_or_state_suspended_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :dea_or_state_suspended, nil, id: "dea_or_state_suspended_na", class: "form-check-input" %>
+								      <%= form.label :dea_or_state_suspended, "N/A", class: "form-check-label", for: "dea_or_state_suspended_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :action_against_you, "8. any peer review type actions against you?*", class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :action_against_you, true, id: "action_against_you_yes", class: "form-check-input" %>
+								      <%= form.label :action_against_you, "Yes", class: "form-check-label", for: "action_against_you_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :action_against_you, false, id: "action_against_you_no", class: "form-check-input" %>
+								      <%= form.label :action_against_you, "No", class: "form-check-label", for: "action_against_you_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :action_against_you, nil, id: "action_against_you_na", class: "form-check-input" %>
+								      <%= form.label :action_against_you, "N/A", class: "form-check-label", for: "action_against_you_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :ever_been_denied_membership, "9. Have you ever been denied membership,or renewal of membership,<br> or been subject to disciplinary proceddings for a medical,dental or<br> ethical reason by any dental/professional organization?*".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :ever_been_denied_membership, true, id: "ever_been_denied_membership_yes", class: "form-check-input" %>
+								      <%= form.label :ever_been_denied_membership, "Yes", class: "form-check-label", for: "ever_been_denied_membership_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :ever_been_denied_membership, false, id: "ever_been_denied_membership_no", class: "form-check-input" %>
+								      <%= form.label :ever_been_denied_membership, "No", class: "form-check-label", for: "ever_been_denied_membership_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :ever_been_denied_membership, nil, id: "ever_been_denied_membership_na", class: "form-check-input" %>
+								      <%= form.label :ever_been_denied_membership, "N/A", class: "form-check-label", for: "ever_been_denied_membership_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+					    </fieldset>
+
+					    <fieldset>
+								<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Criminal Civil History</legend>
+					      </div>
+					      <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :ever_been_convicted, "10. Have you ever been convicted of,pled guilty to,or pled no<br> contest to any felony?".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :ever_been_convicted, true, id: "ever_been_convicted_yes", class: "form-check-input" %>
+								      <%= form.label :ever_been_convicted, "Yes", class: "form-check-label", for: "ever_been_convicted_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :ever_been_convicted, false, id: "ever_been_convicted_no", class: "form-check-input" %>
+								      <%= form.label :ever_been_convicted, "No", class: "form-check-label", for: "ever_been_convicted_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :ever_been_convicted, nil, id: "ever_been_convicted_na", class: "form-check-input" %>
+								      <%= form.label :ever_been_convicted, "N/A", class: "form-check-label", for: "ever_been_convicted_na" %>
+								    </div>
+								  </div>
+								</div>
+					    </fieldset>
+					    <fieldset>
+								<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Ability to perform job</legend>
+					      </div>
+					      <div class="mb-3 row px-3 mt-2">
+								  <%= form.label :are_you_currently_engage, "11.ARE YOU CURRENTLY (OR DID YOU IN LAST FIVE YEARS) ENGAGED IN THE<br> ILLEGAL USE OF DRUGS? (“CURRENTLY” MEANS SUFFICIENTLY RECENT TO<br> JUSTIFY A REASONABLE BELIEF THAT THE USE OF DRUGS MAY HAVE AN<br> ONGOING IMPACT ON ONE'S ABILITY TO PRACTICE MEDICINE. IT IS NOT LIMITED<br> TO THE DAY OF, OR WITHIN A MATTER OF DAYS OR WEEKS BEFORE THE DATE OF<br> APPLICATION, RATHER THAT IT HAS OCCURRED RECENTLY ENOUGH TO<br> INDICATE THE INDIVIDUAL IS ACTIVELY ENGAGED IN SUCH CONDUCT. “ILLEGAL<br> USE OF DRUGS” REFERS TO DRUGS WHOSE POSSESSION OR DISTRIBUTION IS<br> UNLAWFUL UNDER THE CONTROLLED SUBSTANCES ACT, 21 U.S.C. ? 812.22. IT<br> “DOES NOT INCLUDE THE USE OF A DRUG TAKEN UNDER SUPERVISION BY A<br> LICENSED HEALTH CARE PROFESSIONAL, OR OTHER USES AUTHORIZED BY THE<br> CONTROLLED SUBSTANCES ACT OR OTHER PROVISION OF FEDERAL LAW.” THE<br> TERM DOES INCLUDE, HOWEVER, THE UNLAWFUL USE OF PRESCRIPTION<br> CONTROLLED SUBSTANCES.) *".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :are_you_currently_engage, true, id: "are_you_currently_engage_yes", class: "form-check-input" %>
+								      <%= form.label :are_you_currently_engage, "Yes", class: "form-check-label", for: "are_you_currently_engage_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :are_you_currently_engage, false, id: "are_you_currently_engage_no", class: "form-check-input" %>
+								      <%= form.label :are_you_currently_engage, "No", class: "form-check-label", for: "are_you_currently_engage_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :are_you_currently_engage, nil, id: "are_you_currently_engage_na", class: "form-check-input" %>
+								      <%= form.label :are_you_currently_engage, "N/A", class: "form-check-label", for: "are_you_currently_engage_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :have_you_ever_recieved_treatment_alcohol, "12. ARE YOU NOW OR HAVE YOU EVER RECEIVED TREATMENT OR BEEN ADVISED<br> TO RECEIVE TREATMENT FOR ALCOHOL OR SUBSTANCE OR CHEMICAL<br> DEPENDENCY? *".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :have_you_ever_recieved_treatment_alcohol, true, id: "have_you_ever_recieved_treatment_alcohol_yes", class: "form-check-input" %>
+								      <%= form.label :have_you_ever_recieved_treatment_alcohol, "Yes", class: "form-check-label", for: "have_you_ever_recieved_treatment_alcohol_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :have_you_ever_recieved_treatment_alcohol, false, id: "have_you_ever_recieved_treatment_alcohol_no", class: "form-check-input" %>
+								      <%= form.label :have_you_ever_recieved_treatment_alcohol, "No", class: "form-check-label", for: "have_you_ever_recieved_treatment_alcohol_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :have_you_ever_recieved_treatment_alcohol, nil, id: "have_you_ever_recieved_treatment_alcohol_na", class: "form-check-input" %>
+								      <%= form.label :have_you_ever_recieved_treatment_alcohol, "N/A", class: "form-check-label", for: "have_you_ever_recieved_treatment_alcohol_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								    <%= form.label :do_you_use,"13. DO YOU USE (OR HAVE USED IN LAST 5 YEARS) ANY CHEMICAL SUBSTANCES<br> THAT WOULD IN ANY WAY IMPAIR OR LIMIT YOUR ABILITY TO PRACTICE<br> MEDICINE AND PERFORM THE FUNCTIONS OF YOUR JOB WITH REASONABLE<br> SKILL AND SAFETY? *".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :do_you_use, true, id: "do_you_use_yes", class: "form-check-input" %>
+								      <%= form.label :do_you_use, "Yes", class: "form-check-label", for: "do_you_use_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :do_you_use, false, id: "do_you_use_no", class: "form-check-input" %>
+								      <%= form.label :do_you_use, "No", class: "form-check-label", for: "do_you_use_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :do_you_use, nil, id: "do_you_use_na", class: "form-check-input" %>
+								      <%= form.label :do_you_use, "N/A", class: "form-check-label", for: "do_you_use_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :risk_to_the_safety, "14. DO YOU HAVE ANY REASON TO BELIEVE THAT YOU WOULD POSE A RISK TO<br> THE SAFETY OR WELL BEING OF YOUR PATIENTS? *".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :risk_to_the_safety, true, id: "risk_to_the_safety_yes", class: "form-check-input" %>
+								      <%= form.label :risk_to_the_safety, "Yes", class: "form-check-label", for: "risk_to_the_safety_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :risk_to_the_safety, false, id: "risk_to_the_safety_no", class: "form-check-input" %>
+								      <%= form.label :risk_to_the_safety, "No", class: "form-check-label", for: "risk_to_the_safety_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :risk_to_the_safety, nil, id: "risk_to_the_safety_na", class: "form-check-input" %>
+								      <%= form.label :risk_to_the_safety, "N/A", class: "form-check-label", for: "risk_to_the_safety_na" %>
+								    </div>
+								  </div>
+								</div>
+								<hr>
+
+								<div class="mb-3 row px-3 mt-2">
+								  <%= form.label :do_you_comply_with_federal, "15. DO YOU COMPLY WITH FEDERAL, STATE AND LOCAL LAWS IN THE CONDUCT<br> OF YOUR PROFESSION INCLUDING THOSE PROHIBITING DISCRIMINATION<br> AGAINST THE DISABLED? *".html_safe, class: "col-sm-9 col-form-label" %>
+								  <div class="col-sm-3">
+								    <div class="form-check form-check-inline">
+								      <%= form.radio_button :do_you_comply_with_federal, true, id: "do_you_comply_with_federal_yes", class: "form-check-input" %>
+								      <%= form.label :do_you_comply_with_federal, "Yes", class: "form-check-label", for: "do_you_comply_with_federal_yes" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 20%;">
+								      <%= form.radio_button :do_you_comply_with_federal, false, id: "do_you_comply_with_federal_no", class: "form-check-input" %>
+								      <%= form.label :do_you_comply_with_federal, "No", class: "form-check-label", for: "do_you_comply_with_federal_no" %>
+								    </div>
+								    <div class="form-check form-check-inline" style="margin-left: 18%;">
+								      <%= form.radio_button :do_you_comply_with_federal, nil, id: "do_you_comply_with_federal_na", class: "form-check-input" %>
+								      <%= form.label :do_you_comply_with_federal, "N/A", class: "form-check-label", for: "do_you_comply_with_federal_na" %>
+								    </div>
+								  </div>
+								</div>
+					    </fieldset>
+	          </div>
+	        <% end %>
+	      </div>
+      </div>
+    </div>
+  </main>
+</div>
+<style>
+ form label {
+  text-transform: uppercase;
+}
+.border-direction{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+  .margin-heading{
+    margin-left:0px;
+    margin-right: 0px;
+  }
+
+.list-group-item {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+.list-group-item.active {
+  background-color: #26408B;
+  color: white;
+  border-radius: 18px;
+  padding: 19px;
+}
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .grey-head{
+    background-color: lightgrey;
+  }
+
+
+  .fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -5px;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+
+  function saveAndNavigate(url) {
+  $.ajax({
+    url: '<%= save_doctor_doctor_path(@doctor) %>',  // Corrected PATCH route for saving Doctor data
+    method: 'PATCH',
+    data: $('#personal-form').serialize(),  // Serialize data from the Personal form
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  // Attach CSRF token
+    },
+    success: function() {
+      // Redirect to the specified URL (next tab) on success
+      window.location.href = url;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+</script>
+

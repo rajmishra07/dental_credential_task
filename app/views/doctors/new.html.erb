@@ -1,0 +1,239 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #26408B;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded-circle bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="#" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active ">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 p-4 bg-light">
+    <h2 class="mx-3">
+      Create Doctor
+    </h2><hr>
+    <div class="mx-3">
+      <%= form_with(model: @doctor, local: true, class: 'form') do |form| %>
+        <% if @doctor.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@doctor.errors.count, "error") %> prohibited this doctor from being saved:</h4>
+            <ul>
+              <% @doctor.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3 row  fw-bold text-center">
+          <%= form.label :primary_state, 'PRIMARY STATE', class: 'col-sm-2  col-form-label text-center padding-left-side' %>
+          <div class="col-sm-10 ">
+            <%= form.text_field :primary_state, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row fw-bold">
+          <%= form.label :primary_location, 'PRIMARY LOCATION', class: 'col-sm-2 col-form-label ',style:"padding-left: 20px;" %>
+          <div class="col-sm-10" >
+            <%= form.text_field :primary_location, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row ">
+          <div class="offset-sm-2 col-sm-10 ">
+            <%= button_tag 'Add Additional Offices', type: 'button', class: 'btn btn-blue fw-bold' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :full_name, 'Name', class: 'offset-sm-1 col-sm-1 fw-bold col-form-label' ,style:"padding-left:3%;" %>
+          <div class="col-sm-10">
+            <%= form.text_field :full_name, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :username, 'Username', class: 'col-sm-2  col-form-label fw-bold' ,style:"padding-left:9%;" %>
+          <div class="col-sm-10">
+            <%= form.text_field :username, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :email, 'Email Address', class: 'col-sm-2 col-form-label fw-bold' ,style:"padding-left:6%;" %>
+          <div class="col-sm-10">
+            <%= form.email_field :email, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :admin, 'Admin', class: 'col-sm-2 col-form-label fw-bold', style: "padding-left:11%;" %>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <%= form.check_box :admin, class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :doctor, 'Doctor', class: 'col-sm-2  col-form-label fw-bold', style: "padding-left:11%;" %>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <%= form.check_box :doctor, class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="mb-3 row">
+          <%= form.label :signature, 'Upload Signature', class: 'col-sm-2 col-form-label fw-bold',style:"padding-left:4%;" %>
+          <div class="col-sm-10">
+            <%= form.file_field :signature %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= form.label :bundle, 'Upload Bundle File', class: 'col-sm-2 col-form-label fw-bold' ,style:"padding-left:3%;" %>
+          <div class="col-sm-10">
+            <%= form.file_field :bundle , class: 'round' %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="offset-sm-2 col-sm-10">
+            <%= form.submit 'Save and Close', class: 'btn btn-blue' %>
+            <%= link_to 'Close', doctors_path, class: 'btn btn-danger' %>   
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+  </main>
+</div>
+
+<style>
+
+
+  .padding-left-side{
+    padding-left: 52px;
+  }
+
+.sidebar {
+  padding-top: 90px;
+}
+.list-group-item {
+    padding: 23px;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.list-group-item.active {
+    background-color: #26408B;
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+
+.search-bar {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px 0 0 5px; 
+    width: 400px;
+}
+
+.search-btn {
+    border: none;
+    background-color: #26408B;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    font-weight: bold;
+}
+
+
+.btn1 {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+
+.btn-blue {
+    background-color: #26408B;
+    color: white;
+    border-radius: 5px !important; 
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+
+
+ .btn-danger {
+    color: white;
+    margin-left: 10px;
+    font-weight: bold; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    border-bottom-right-radius: 10px !important; 
+    border-bottom-left-radius: 10px !important; 
+}
+
+.vertical-line {
+    border-left: 2px solid white; 
+    height: auto; 
+    min-height: 85px; 
+    margin: 0 42px; 
+}
+.vertical-line1 {
+    border-left: 1px solid #ccc;
+    height: 100%; 
+  }
+
+</style>

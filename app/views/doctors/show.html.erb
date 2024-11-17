@@ -1,0 +1,44 @@
+<h1>Doctor Profile</h1>
+
+<div class="doctor-details">
+  <p><strong>Full Name:</strong> <%= @doctor.full_name %></p>
+  <p><strong>Username:</strong> <%= @doctor.username %></p>
+  <p><strong>Email:</strong> <%= @doctor.email %></p>
+  <p><strong>Admin:</strong> <%= @doctor.admin ? "Yes" : "No" %></p>
+  <p><strong>Doctor:</strong> <%= @doctor.doctor ? "Yes" : "No" %></p>
+  <p><strong>Has Office:</strong> <%= @doctor.has_office ? "Yes" : "No" %></p>
+  <p><strong>Profile:</strong> <%= @doctor.profile %></p>
+  <p><strong>Last Updated:</strong> <%= @doctor.last_updated %></p>
+  <p><strong>Primary State:</strong> <%= @doctor.primary_state %></p>
+  <p><strong>Primary Location:</strong> <%= @doctor.primary_location %></p>
+  <p><strong>Created At:</strong> <%= @doctor.created_at %></p>
+  <p><strong>Updated At:</strong> <%= @doctor.updated_at %></p>
+  <p><strong>SSN:</strong> <%= @doctor.ssn %></p>
+  <p><strong>Last Name:</strong> <%= @doctor.last_name %></p>
+  <p><strong>First Name:</strong> <%= @doctor.first_name %></p>
+  <p><strong>Date of Birth:</strong> <%= @doctor.date_of_birth %></p>
+  <p><strong>Middle Initial:</strong> <%= @doctor.middle_initial %></p>
+  <p><strong>Todays Date:</strong> <%= @doctor.todays_date %></p>
+  <p><strong>Languages Spoken:</strong> <%= @doctor.languages_spoken.join(", ") %></p>
+  <p><strong>DEA Number:</strong> <%= @doctor.dea_number %></p>
+  <p><strong>DEA Issue Date:</strong> <%= @doctor.dea_issue_date %></p>
+  <p><strong>DEA Expiration Date:</strong> <%= @doctor.dea_expiration_date %></p>
+  <p><strong>State License Number:</strong> <%= @doctor.state_license_number %></p>
+  <p><strong>License Issuing State:</strong> <%= @doctor.license_issuing_state %></p>
+  <p><strong>License Expiration Date:</strong> <%= @doctor.license_expiration_date %></p>
+  <p><strong>Controlled Substance Issue Date:</strong> <%= @doctor.controlled_substance_issue_date %></p>
+  <p><strong>Medicaid Number:</strong> <%= @doctor.medicaid_number %></p>
+  <p><strong>NPI Number:</strong> <%= @doctor.npi_number %></p>
+  <p><strong>State Controlled Substance Number:</strong> <%= @doctor.state_controlled_substance_number %></p>
+  <p><strong>Controlled Substance Expiration Date:</strong> <%= @doctor.controlled_substance_expiration_date %></p>
+  <p><strong>Professional Degree:</strong> <%= @doctor.professional_degree %></p>
+  <p><strong>Gender:</strong> <%= @doctor.is_male ? "Male" : @doctor.is_female ? "Female" : "Other" %></p>
+  <p><strong>Owner:</strong> <%= @doctor.is_owner ? "Yes" : "No" %></p>
+  <p><strong>Associate:</strong> <%= @doctor.is_associate ? "Yes" : "No" %></p>
+  <p><strong>DDS:</strong> <%= @doctor.is_dds ? "Yes" : "No" %></p>
+  <p><strong>DMD:</strong> <%= @doctor.is_dmd ? "Yes" : "No" %></p>
+  <p><strong>General Dentist:</strong> <%= @doctor.is_general_dentist ? "Yes" : "No" %></p>
+  <p><strong>Specialty:</strong> <%= @doctor.specialty %></p>
+  <p><strong>Other:</strong> <%= @doctor.has_other ? "Yes" : "No" %></p>
+  <p><strong>Other Details:</strong> <%= @doctor.other_details %></p>
+</div>

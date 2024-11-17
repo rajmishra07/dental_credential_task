@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.2"
+ruby "3.1.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4", ">= 7.1.4.1"
@@ -65,3 +65,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'devise'
+gem 'cssbundling-rails'
+
+gem 'active_storage_validations'

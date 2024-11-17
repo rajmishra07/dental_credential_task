@@ -1,0 +1,282 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #11468f;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action  px-3">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 p-2 mx-4">
+    <h2 class="fw-bold">
+      DOCTOR PROFILE
+      <i class="fas fa-info-circle"></i>
+      <hr style="width: 30%;">
+    </h2>
+     <h5 class="mt-4 fw-bold fs-1"><%= @doctor.full_name %></h5>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Personal(0)', edit_personal_doctor_path(@doctor), class: "btn1 btn btn-grey" %>
+        <%= link_to 'Education(0)', '#', onclick: "saveAndNavigate('#{edit_education_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Offices(0)','#', onclick: "saveAndNavigate('#{edit_office_doctor_path(@doctor)}')", class: "btn1 btn btn-blue" %>
+        <%= link_to 'Work History(0)', '#', onclick: "saveAndNavigate('#{edit_work_history_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        
+        <%= link_to 'Liability(0)','#', onclick: "saveAndNavigate('#{edit_liability_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Disclosure(0)', '#', onclick: "saveAndNavigate('#{edit_disclosure_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <button class="btn1 btn-grey">Save</button>
+      </div>
+    </div>
+    <div class="row border mt-3 mb-3 fw-bold m-1">
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="mt-4 col-sm-2">
+          <button class=" btn1 btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="collapseExample">
+          COLLAPSE ALL
+          </button>
+        </div>
+      </div>
+      <div class="p-3">
+        <div id="collapsePersonalInfo" class="collapse show">
+          <%= form_with(model: @doctor, local: true, html: { class: "form-border", id: "personal-form" }) do |form| %>
+            <div class="col-md-12 border-direction">
+              <fieldset class="border ">
+                <div class="row border grey-head margin-heading">
+                  <legend class="w-auto py-2 fs-6">Practice Location</legend>
+                </div>
+                
+                <div class="mb-3 row px-3 mt-2">
+                  <%= form.label :practice_start_date, "1. WHAT WAS THE START DATE WITH THIS PRACTICE. IF NOT STARTED YET, WHAT <br> IS THE FUTURE DATE? (MM/YYYY)".html_safe, class: "col-sm-9 col-form-label " %>
+                  <div class="col-sm-3">
+                    <%= form.date_field :practice_start_date, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3 mt-3">
+                  <%= form.label :practice_name, "2. NAME OF THIS PRACTICE", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :practice_name, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_street_address, "3. STREET ADDRESS", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :office_street_address, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_suite_bldg, "4. SUITE/BLDG", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :office_suite_bldg, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_city, "5. CITY", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :office_city, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_state, "6. STATE", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.select :office_state, 
+                      options_for_select(['choose one', 'New York', 'California','xyz'], @doctor.office_state), 
+                      {}, class: 'form-select form-control rounded-0 fw-bold', 
+                      id: 'officeState' %>
+                  </div>
+                </div>
+                <hr>
+
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_zip, "7. ZIP", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :office_zip, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_county, "8. COUNTY", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :office_county, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_phone, "9. PHONE", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.telephone_field :office_phone, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="mb-3 row px-3">
+                  <%= form.label :office_fax, "10. FAX", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.telephone_field :office_fax, class: "form-control" %>
+                  </div>
+                </div>  
+              </fieldset>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<style>
+
+.border-direction{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+  .margin-heading{
+    margin-left:0px;
+    margin-right: 0px;
+  }
+
+.list-group-item {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+.list-group-item.active {
+  background-color: #26408B;
+  color: white;
+  border-radius: 18px;
+  padding: 19px;
+}
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .grey-head{
+    background-color: lightgrey;
+  }
+
+
+  .fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -5px;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+
+  function saveAndNavigate(url) {
+  $.ajax({
+    url: '<%= save_doctor_doctor_path(@doctor) %>',  // Corrected PATCH route for saving Doctor data
+    method: 'PATCH',
+    data: $('#personal-form').serialize(),  // Serialize data from the Personal form
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  // Attach CSRF token
+    },
+    success: function() {
+      // Redirect to the specified URL (next tab) on success
+      window.location.href = url;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+</script>
+

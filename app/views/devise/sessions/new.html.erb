@@ -1,0 +1,123 @@
+<div id="login-container" class="mt-5">
+  <div class="card mt-5" style="width: 38rem; border-top-left-radius: 25px; border-top-right-radius: 25px;">
+    <div class="card-header text-white px-3 d-flex justify-content-between align-items-center" style="border-top-left-radius: 25px; border-top-right-radius: 25px; background-color: #151e59;">
+      <div class="d-flex align-items-center">
+        <div>
+          <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+        </div>
+        <div class="vertical-line"></div>
+        <div>
+          <h3 class="fw-bold">Dental Credentialing<br> Manager</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card-body mx-3 ">
+      <h1 class="card-title">Sign In</h1>
+      <p class="form-text text-danger mt-4">You need to sign in before continuing</p>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control",placeholder: "test123@gmail.com" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password, class: "form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control",placeholder: "*****" %>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <a href="#" class="form-link text-muted">Having trouble signing in?</a>
+          <%= link_to "Forgot Password?", new_password_path(resource_name), class: "form-link" %>
+        </div>
+
+        <div class="actions text-center p-3">
+          <%= f.submit "Sign in", class: "btn btn-signin btn-sm  fw-bold" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%# <%= render "devise/shared/links" %> 
+
+<style>
+
+.logo {
+  height: 20%;
+  width: 175px;
+}
+
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 67px;
+  margin: 0 42px;
+}
+  #login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.card-header {
+    background-color: #151e59;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  .card-title {
+    font-size: 35px;
+  }
+
+  .form-control {
+    height: 30px;
+    padding: 10px;
+    border: 1px solid black; /* Change border color to black */
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+
+  .btn-signin{
+    background-color: #151e59;
+    color: white;
+    width: 150px;
+    height: 50px;
+    font-size:20px;
+    border-radius: 10px;
+  } 
+
+  .form-link {
+    color: #2c0e5c;
+    text-decoration: none;
+  }
+
+  .form-link:hover {
+    text-decoration: underline;
+  }
+
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+</style>

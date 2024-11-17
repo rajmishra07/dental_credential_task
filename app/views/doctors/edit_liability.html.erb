@@ -1,0 +1,343 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #11468f;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action  px-3">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 p-2 mx-4">
+    <h2 class="fw-bold">
+      DOCTOR PROFILE
+      <i class="fas fa-info-circle"></i>
+      <hr style="width: 30%;">
+    </h2>
+     <h5 class="mt-4 fw-bold fs-1"><%= @doctor.full_name %></h5>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Personal(0)', edit_personal_doctor_path(@doctor), class: "btn1 btn btn-grey" %>
+        <%= link_to 'Education(0)', '#', onclick: "saveAndNavigate('#{edit_education_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Offices(0)','#', onclick: "saveAndNavigate('#{edit_office_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Work History(0)', '#', onclick: "saveAndNavigate('#{edit_work_history_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        
+        <%= link_to 'Liability(0)','#', onclick: "saveAndNavigate('#{edit_liability_doctor_path(@doctor)}')", class: "btn1 btn btn-blue" %>
+        <%= link_to 'Disclosure(0)', '#', onclick: "saveAndNavigate('#{edit_disclosure_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <button class="btn1 btn-grey">Save</button>
+      </div>
+    </div>
+    <div class="row border mt-3 mb-3 fw-bold m-1">
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="mt-4 col-sm-2">
+          <button class=" btn1 btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="collapseExample">
+          COLLAPSE ALL
+          </button>
+        </div>
+      </div>
+      <div class="p-3">
+      	<div id="collapsePersonalInfo" class="collapse show">
+	        <div class="col-md-12 border-direction">
+					  <%= form_with(model: @doctor, local: true, html: { class: "form-border", id: "personal-form" }) do |form| %>
+					    <fieldset class="border">
+					      <div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Malpractice: Coverage (If covered by employer skip to Professional Liability:History)</legend>
+					      </div>
+
+					      <div class="mb-3 row px-3 mt-2">
+					        <%= form.label :malpractice_insurance, "1. Do you carry malpractice insurance?", class: "col-sm-9 col-form-label " %>
+					        <div class="col-sm-3">
+					          <div class="form-check form-check-inline">
+					            <%= form.radio_button :malpractice_insurance, true, id: "malpractice_insurance_yes", class: "form-check-input" %>
+					            <%= form.label :malpractice_insurance, "Yes", class: "form-check-label", for: "malpractice_insurance_yes" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 20%;">
+					            <%= form.radio_button :malpractice_insurance, false, id: "malpractice_insurance_no", class: "form-check-input" %>
+					            <%= form.label :malpractice_insurance, "No", class: "form-check-label", for: "malpractice_insurance_no" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 18%;">
+					            <%= form.radio_button :malpractice_insurance, nil, id: "malpractice_insurance_na", class: "form-check-input" %>
+					            <%= form.label :malpractice_insurance, "N/A", class: "form-check-label", for: "malpractice_insurance_na" %>
+					          </div>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :insurance_carrier_name, "2.Carrier or self-insured Name?*", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <%= form.text_field :insurance_carrier_name, class: "form-control" %>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :insurance_expiration_date, "3.Expiration Date(mm/dd/yyyy)", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <%= form.date_field :insurance_expiration_date, class: "form-control" %>
+					        </div>
+					      </div>
+					    </fieldset>
+					    <fieldset class="border">
+					    	<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Malpractice: Type of Coverage</legend>
+					      </div>
+					      <div class="mb-3 row px-3 mt-3">
+					        <%= form.label :coverage_per_occurrence, "4. amount of Coverage Per Occurrence ", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <%= form.number_field :coverage_per_occurrence, step: "0.01", class: "form-control" %>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :coverage_aggregate, "5. amount of Coverage Aggregate ", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <%= form.number_field :coverage_aggregate, step: "0.01", class: "form-control" %>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :policy_number, "6. Policy Number*", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <%= form.text_field :policy_number, class: "form-control" %>
+					        </div>
+					      </div>
+					    </fieldset>
+					    <fieldset class="border">
+					    	<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Professional Libility: History</legend>
+					      </div>
+					      <div class="mb-3 row px-3 mt-2">
+					        <%= form.label :liability_coverage_cancelled, "7. Has your professional liability coverage ever been cancelled,<br>restricted,declined or not renewed bt the carrier based on your <br> individual liability history?".html_safe, class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <div class="form-check form-check-inline">
+					            <%= form.radio_button :liability_coverage_cancelled, true, id: "liability_coverage_cancelled_yes", class: "form-check-input" %>
+					            <%= form.label :liability_coverage_cancelled, "Yes", class: "form-check-label", for: "liability_coverage_cancelled_yes" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 20%;">
+					            <%= form.radio_button :liability_coverage_cancelled, false, id: "liability_coverage_cancelled_no", class: "form-check-input" %>
+					            <%= form.label :liability_coverage_cancelled, "No", class: "form-check-label", for: "liability_coverage_cancelled_no" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 18%;">
+					            <%= form.radio_button :liability_coverage_cancelled, nil, id: "liability_coverage_cancelled_na", class: "form-check-input" %>
+					            <%= form.label :liability_coverage_cancelled, "N/A", class: "form-check-label", for: "liability_coverage_cancelled_na" %>
+					          </div>
+					        </div>
+					      </div>
+					    </fieldset>
+					    <fieldset>
+								<div class="row border grey-head margin-heading">
+					        <legend class="w-auto py-2 fs-6">Professional Libility: History</legend>
+					      </div>
+					      <div class="mb-3 row px-3">
+					        <%= form.label :presently_pending, "8.presently pending?", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <div class="form-check form-check-inline">
+					            <%= form.radio_button :presently_pending, true, id: "presently_pending_yes", class: "form-check-input" %>
+					            <%= form.label :presently_pending, "Yes", class: "form-check-label", for: "presently_pending_yes" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 20%;">
+					            <%= form.radio_button :presently_pending, false, id: "presently_pending_no", class: "form-check-input" %>
+					            <%= form.label :presently_pending, "No", class: "form-check-label", for: "presently_pending_no" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 18%;">
+					            <%= form.radio_button :presently_pending, nil, id: "presently_pending_na", class: "form-check-input" %>
+					            <%= form.label :presently_pending, "N/A", class: "form-check-label", for: "presently_pending_na" %>
+					          </div>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :liability_actions_past_5_years, "9. Have you had any professional liability actions(pending,settled,<br>arbitrated,mediated or letigated) within the past 5 years?*if yes,<br>provide information for each case.*".html_safe, class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <div class="form-check form-check-inline">
+					            <%= form.radio_button :liability_actions_past_5_years, true, id: "liability_actions_past_5_years_yes", class: "form-check-input" %>
+					            <%= form.label :liability_actions_past_5_years, "Yes", class: "form-check-label", for: "liability_actions_past_5_years_yes" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 20%;">
+					            <%= form.radio_button :liability_actions_past_5_years, false, id: "liability_actions_past_5_years_no", class: "form-check-input" %>
+					            <%= form.label :liability_actions_past_5_years, "No", class: "form-check-label", for: "liability_actions_past_5_years_no" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 18%;">
+					            <%= form.radio_button :liability_actions_past_5_years, nil, id: "liability_actions_past_5_years_na", class: "form-check-input" %>
+					            <%= form.label :liability_actions_past_5_years, "N/A", class: "form-check-label", for: "liability_actions_past_5_years_na" %>
+					          </div>
+					        </div>
+					      </div>
+					      <hr>
+
+					      <div class="mb-3 row px-3">
+					        <%= form.label :malpractice_occurrence, "10. Have you ever had any malpractice occurrences?", class: "col-sm-9 col-form-label" %>
+					        <div class="col-sm-3">
+					          <div class="form-check form-check-inline">
+					            <%= form.radio_button :malpractice_occurrence, true, id: "malpractice_occurrence_yes", class: "form-check-input" %>
+					            <%= form.label :malpractice_occurrence, "Yes", class: "form-check-label", for: "malpractice_occurrence_yes" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 20%;">
+					            <%= form.radio_button :malpractice_occurrence, false, id: "malpractice_occurrence_no", class: "form-check-input" %>
+					            <%= form.label :malpractice_occurrence, "No", class: "form-check-label", for: "malpractice_occurrence_no" %>
+					          </div>
+					          <div class="form-check form-check-inline" style="margin-left: 18%;">
+					            <%= form.radio_button :malpractice_occurrence, nil, id: "malpractice_occurrence_na", class: "form-check-input" %>
+					            <%= form.label :malpractice_occurrence, "N/A", class: "form-check-label", for: "malpractice_occurrence_na" %>
+					          </div>
+					        </div>
+					      </div>
+					    </fieldset>
+					  <% end %>
+					</div>
+				</div>
+      </div>
+    </div>
+  </main>
+</div>
+<style>
+ form label {
+  text-transform: uppercase;
+}
+.border-direction{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+  .margin-heading{
+    margin-left:0px;
+    margin-right: 0px;
+  }
+
+.list-group-item {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+.list-group-item.active {
+  background-color: #26408B;
+  color: white;
+  border-radius: 18px;
+  padding: 19px;
+}
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .grey-head{
+    background-color: lightgrey;
+  }
+
+
+  .fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -5px;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+
+  function saveAndNavigate(url) {
+  $.ajax({
+    url: '<%= save_doctor_doctor_path(@doctor) %>',  // Corrected PATCH route for saving Doctor data
+    method: 'PATCH',
+    data: $('#personal-form').serialize(),  // Serialize data from the Personal form
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  // Attach CSRF token
+    },
+    success: function() {
+      // Redirect to the specified URL (next tab) on success
+      window.location.href = url;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+</script>

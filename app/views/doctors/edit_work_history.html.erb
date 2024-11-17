@@ -1,0 +1,376 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #11468f;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+     <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action  px-3">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1  p-2 mx-4 ">
+    <h2 class="fw-bold">
+      DOCTOR PROFILE
+      <i class="fas fa-info-circle"></i>
+      <hr style="width: 30%;">
+    </h2>
+     <h5 class="mt-4 fw-bold fs-1"><%= @doctor.full_name %></h5>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Personal(0)', edit_personal_doctor_path(@doctor), class: "btn1 btn btn-grey" %>
+        <%= link_to 'Education(0)', '#', onclick: "saveAndNavigate('#{edit_education_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Offices(0)','#', onclick: "saveAndNavigate('#{edit_office_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Work History(0)', '#', onclick: "saveAndNavigate('#{edit_work_history_doctor_path(@doctor)}')", class: "btn1 btn btn-blue" %>
+        
+        <%= link_to 'Liability(0)','#', onclick: "saveAndNavigate('#{edit_liability_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Disclosure(0)', '#', onclick: "saveAndNavigate('#{edit_disclosure_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <button class="btn1 btn-grey">Save</button>
+      </div>
+    </div>
+    <div class="row border mt-3 mb-3 fw-bold m-1">
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="mt-4 col-sm-2">
+          <button class=" btn1 btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="collapseExample">
+          COLLAPSE ALL
+          </button>
+        </div>
+      </div>
+      <div class="p-3">
+         <div id="collapsePersonalInfo" class="collapse show">
+            <%= form_with(model: @doctor, local: true, html: { class: "form-border", id: "personal-form" }) do |f| %>
+              <div class="col-md-12 border-direction">
+                <!-- Previous Employer 1 -->
+                <fieldset class="border">
+                  <div class="row grey-head margin-heading">
+                    <legend class="w-auto fs-6 py-1 ">Previous Employer 1</legend>
+                  </div>
+
+                  <div class="mb-3 row mt-3 px-3">
+                    <%= f.label :previous_employer_1_name, "1. PRACTICE/EMPLOYER NAME (CURRENT) *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_1_name, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_street_address, "2. STREET ADDRESS *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_1_street_address, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_city, "3. CITY *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_1_city, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_state, "4. STATE", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.select :previous_employer_1_state, 
+                        options_for_select(['choose one', 'New York', 'California','xyz'], @doctor.previous_employer_1_state), 
+                        {}, class: 'form-select form-control rounded-0 fw-bold', 
+                        id: 'previous_employer_1_state' %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_zip, "5. ZIP *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_1_zip, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_phone, "6. PHONE *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.telephone_field :previous_employer_1_phone, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_start_date, "7. START DATE (MM/YYYY) *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_1_start_date, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_1_end_date, "8. END DATE (MM/YYYY) *", class: "col-sm-9 col-form-label text-danger" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_1_end_date, class: "form-control" %>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Previous Employer 2 -->
+                <fieldset class="border">
+                  <div class="row grey-head margin-heading">
+                    <legend class="w-auto fs-6 py-1 ">Previous Employer 2</legend>
+                  </div>
+
+                  <div class="mb-3 row mt-3 px-3">
+                    <%= f.label :previous_employer_2_name, "9. PRACTICE/EMPLOYER NAME *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_2_name, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_suite, "10. SUIT/BLDG *", class: "col-sm-9 col-form-label text-danger" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_2_suite, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_state, "11. STATE", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.select :previous_employer_2_state, 
+                        options_for_select(['choose one', 'New York', 'California','xyz'], @doctor.previous_employer_2_state), 
+                        {}, class: 'form-select form-control rounded-0 fw-bold', 
+                        id: 'previous_employer_2_state' %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_zip, "12. ZIP *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_2_zip, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_phone, "13. PHONE *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.telephone_field :previous_employer_2_phone, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_start_date, "14. START DATE (MM/YYYY) *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_2_start_date, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+     
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_2_end_date, "15. END DATE (MM/YYYY) *", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_2_end_date, class: "form-control" %>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Previous Employer 3 -->
+                <fieldset class="border">
+                  <div class="row grey-head margin-heading">
+                    <legend class="w-auto fs-6 py-1 ">Previous Employer 3</legend>
+                  </div>
+
+                  <div class="mb-3 row mt-3 px-3">
+                    <%= f.label :previous_employer_3_name, "16. PRACTICE/EMPLOYER NAME *", class: "col-sm-9 col-form-label text-danger" %>
+                    <div class="col-sm-3">
+                      <%= f.text_field :previous_employer_3_name, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_3_start_date, "17. START DATE (MM/YYYY) *", class: "col-sm-9 col-form-label text-danger" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_3_start_date, class: "form-control" %>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="mb-3 row px-3">
+                    <%= f.label :previous_employer_3_end_date, "18. END DATE (MM/YYYY) *", class: "col-sm-9 col-form-label text-danger" %>
+                    <div class="col-sm-3">
+                      <%= f.date_field :previous_employer_3_end_date, class: "form-control" %>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Work History Gaps -->
+                <fieldset class="border">
+                  <div class="row grey-head margin-heading">
+                    <legend class="w-auto fs-6 py-1 ">Work History: Gaps</legend>
+                  </div>
+
+                  <div class="mb-3 row mt-3 px-3">
+                    <%= f.label :work_history_gaps, "19. EXPLAIN ANY GAPS GREATER THAN THREE MONTHS:", class: "col-sm-9 col-form-label" %>
+                    <div class="col-sm-3">
+                      <%= f.text_area :work_history_gaps, class: "form-control" %>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </main>
+</div>
+<style>
+  .margin-heading{
+    margin-left:0px;
+    margin-right: 0px;
+  }
+
+.border-direction{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+  .pixel-2{
+    padding-left: 0.8%;
+    padding-right: 0.8%;
+  }
+.list-group-item {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+.list-group-item.active {
+  background-color: #26408B;
+  color: white;
+  border-radius: 18px;
+  padding: 19px;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .grey-head{
+    background-color: lightgrey;
+  }
+
+  .fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -5px;
+}
+
+</style>
+
+<script type="text/javascript">
+
+  function saveAndNavigate(url) {
+  $.ajax({
+    url: '<%= save_doctor_doctor_path(@doctor) %>',  
+    method: 'PATCH',
+    data: $('#personal-form').serialize(),  
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  
+    },
+    success: function() {
+      window.location.href = url;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+</script>
+

@@ -1,0 +1,740 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #11468f;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-lg me-3"></i>
+    <div class="rounded bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 28px; height: 28px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x fs-3"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="" class="list-group-item list-group-item-action  px-3">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="<%= doctors_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 p-2 mx-4">
+    <h2 class="fw-bold">
+      DOCTOR PROFILE
+      <i class="fas fa-info-circle"></i>
+      <hr style="width: 30%;">
+    </h2>
+    <h5 class="mt-4 fw-bold fs-1"><%= @doctor.full_name %></h5>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Personal(0)', edit_personal_doctor_path(@doctor), class: "btn1 btn btn-grey" %>
+        <%= link_to 'Education(0)', '#', onclick: "saveAndNavigate('#{edit_education_doctor_path(@doctor)}')", class: "btn1 btn btn-blue" %>
+        <%= link_to 'Offices(0)','#', onclick: "saveAndNavigate('#{edit_office_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Work History(0)', '#', onclick: "saveAndNavigate('#{edit_work_history_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        
+        <%= link_to 'Liability(0)','#', onclick: "saveAndNavigate('#{edit_liability_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <%= link_to 'Disclosure(0)', '#', onclick: "saveAndNavigate('#{edit_disclosure_doctor_path(@doctor)}')", class: "btn1 btn btn-grey" %>
+        <button class="btn1 btn-grey">Save</button>
+      </div>
+    </div>
+    <div class="row border mt-3 mb-3 fw-bold m-1">
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="text-end mt-3">
+          <button class=" btn1 btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".collapse" aria-expanded="false" aria-controls="collapseExample">
+          COLLAPSE ALL
+          </button>
+        </div>
+      </div>
+      <div class="p-3">
+        <div id="collapsePersonalInfo" class="collapse show">
+          <%= form_with(model: @doctor, local: true, html: { class: "form-border", id: "personal-form" }) do |form| %>
+            <div class="col-md-12  border-direction">
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading border-direction1 ">
+                  <legend class="w-auto fs-6 py-1 ">School: Graduate</legend>
+                </div>              
+                <div class="mb-3 row px-3 mt-2">
+                  <%= form.label :school_name, "1. SCHOOL NAME", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :school_name, class: "form-control", id: "school_name" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :end_date, "2. END DATE (MM/YYYY)", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.date_field :end_date, class: "form-control", id: "end_date" %>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto  fs-6 py-1">School: Speciality</legend>
+                </div>
+
+                <div class="mb-3 row mt-3 px-3">
+                  <%= form.label :speciality_school_name, "3. SCHOOL NAME", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :speciality_school_name, class: "form-control", placeholder: "Comma-separated values" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :speciality_end_date, "4. END DATE (MM/YYYY)", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.date_field :speciality_end_date, class: "form-control" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_endodontist, "5. ENDODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_endodontist, true, id: "endodontist_yes", class: "form-check-input" %>
+                      <%= form.label :is_endodontist, "Yes", class: "form-check-label", for: "endodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_endodontist, false, id: "endodontist_no", class: "form-check-input" %>
+                      <%= form.label :is_endodontist, "No", class: "form-check-label", for: "endodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_endodontist, nil, id: "endodontist_na", class: "form-check-input" %>
+                      <%= form.label :is_endodontist, "N/A", class: "form-check-label", for: "endodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_oral_surgeon, "6. ORAL SURGEON?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_oral_surgeon, true, id: "oral_surgeon_yes", class: "form-check-input" %>
+                      <%= form.label :is_oral_surgeon, "Yes", class: "form-check-label", for: "oral_surgeon_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_oral_surgeon, false, id: "oral_surgeon_no", class: "form-check-input" %>
+                      <%= form.label :is_oral_surgeon, "No", class: "form-check-label", for: "oral_surgeon_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_oral_surgeon, nil, id: "oral_surgeon_na", class: "form-check-input" %>
+                      <%= form.label :is_oral_surgeon, "N/A", class: "form-check-label", for: "oral_surgeon_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_orthodontist, "7. ORTHODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_orthodontist, true, id: "orthodontist_yes", class: "form-check-input" %>
+                      <%= form.label :is_orthodontist, "Yes", class: "form-check-label", for: "orthodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_orthodontist, false, id: "orthodontist_no", class: "form-check-input" %>
+                      <%= form.label :is_orthodontist, "No", class: "form-check-label", for: "orthodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_orthodontist, nil, id: "orthodontist_na", class: "form-check-input" %>
+                      <%= form.label :is_orthodontist, "N/A", class: "form-check-label", for: "orthodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_pediatric_dentist, "8. PEDIATRIC DENTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_pediatric_dentist, true, id: "pediatric_dentist_yes", class: "form-check-input" %>
+                      <%= form.label :is_pediatric_dentist, "Yes", class: "form-check-label", for: "pediatric_dentist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_pediatric_dentist, false, id: "pediatric_dentist_no", class: "form-check-input" %>
+                      <%= form.label :is_pediatric_dentist, "No", class: "form-check-label", for: "pediatric_dentist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_pediatric_dentist, nil, id: "pediatric_dentist_na", class: "form-check-input" %>
+                      <%= form.label :is_pediatric_dentist, "N/A", class: "form-check-label", for: "pediatric_dentist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_periodontist, "9. PERIODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_periodontist, true, id: "periodontist_yes", class: "form-check-input" %>
+                      <%= form.label :is_periodontist, "Yes", class: "form-check-label", for: "periodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_periodontist, false, id: "periodontist_no", class: "form-check-input" %>
+                      <%= form.label :is_periodontist, "No", class: "form-check-label", for: "periodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_periodontist, nil, id: "periodontist_na", class: "form-check-input" %>
+                      <%= form.label :is_periodontist, "N/A", class: "form-check-label", for: "periodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_prosthodontist, "10. PROSTHODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_prosthodontist, true, id: "prosthodontist_yes", class: "form-check-input" %>
+                      <%= form.label :is_prosthodontist, "Yes", class: "form-check-label", for: "prosthodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;" >
+                      <%= form.radio_button :is_prosthodontist, false, id: "prosthodontist_no", class: "form-check-input" %>
+                      <%= form.label :is_prosthodontist, "No", class: "form-check-label", for: "prosthodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_prosthodontist, nil, id: "prosthodontist_na", class: "form-check-input" %>
+                      <%= form.label :is_prosthodontist, "N/A", class: "form-check-label", for: "prosthodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2 ">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1 ">Speciality: Primary</legend>
+                </div>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :are_you_periodontist, "11. ARE YOU PERIODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :are_you_periodontist, true, id: "periodontist_yes", class: "form-check-input" %>
+                      <%= form.label :are_you_periodontist, "Yes", class: "form-check-label", for: "periodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :are_you_periodontist, false, id: "periodontist_no", class: "form-check-input" %>
+                      <%= form.label :are_you_periodontist, "No", class: "form-check-label", for: "periodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :are_you_periodontist, nil, id: "periodontist_na", class: "form-check-input" %>
+                      <%= form.label :are_you_periodontist, "N/A", class: "form-check-label", for: "periodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :are_you_endodontist, "12. ARE YOU ENDODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :are_you_endodontist, true, id: "endodontist_yes", class: "form-check-input" %>
+                      <%= form.label :are_you_endodontist, "Yes", class: "form-check-label", for: "endodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :are_you_endodontist, false, id: "endodontist_no", class: "form-check-input" %>
+                      <%= form.label :are_you_endodontist, "No", class: "form-check-label", for: "endodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :are_you_endodontist, nil, id: "endodontist_na", class: "form-check-input" %>
+                      <%= form.label :are_you_endodontist, "N/A", class: "form-check-label", for: "endodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :are_you_oral_surgeon, "13. ARE YOU ORAL SURGEON?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :are_you_oral_surgeon, true, id: "oral_surgeon_yes", class: "form-check-input" %>
+                      <%= form.label :are_you_oral_surgeon, "Yes", class: "form-check-label", for: "oral_surgeon_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :are_you_oral_surgeon, false, id: "oral_surgeon_no", class: "form-check-input" %>
+                      <%= form.label :are_you_oral_surgeon, "No", class: "form-check-label", for: "oral_surgeon_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :are_you_oral_surgeon, nil, id: "oral_surgeon_na", class: "form-check-input" %>
+                      <%= form.label :are_you_oral_surgeon, "N/A", class: "form-check-label", for: "oral_surgeon_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :are_you_orthodontist, "14. ARE YOU ORTHODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :are_you_orthodontist, true, id: "orthodontist_yes", class: "form-check-input" %>
+                      <%= form.label :are_you_orthodontist, "Yes", class: "form-check-label", for: "orthodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :are_you_orthodontist, false, id: "orthodontist_no", class: "form-check-input" %>
+                      <%= form.label :are_you_orthodontist, "No", class: "form-check-label", for: "orthodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :are_you_orthodontist, nil, id: "orthodontist_na", class: "form-check-input" %>
+                      <%= form.label :are_you_orthodontist, "N/A", class: "form-check-label", for: "orthodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_pedodontist, "15. ARE YOU PEDODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_pedodontist, true, id: "pedodontist_yes", class: "form-check-input" %>
+                      <%= form.label :is_pedodontist, "Yes", class: "form-check-label", for: "pedodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_pedodontist, false, id: "pedodontist_no", class: "form-check-input" %>
+                      <%= form.label :is_pedodontist, "No", class: "form-check-label", for: "pedodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_pedodontist, nil, id: "pedodontist_na", class: "form-check-input" %>
+                      <%= form.label :is_pedodontist, "N/A", class: "form-check-label", for: "pedodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :are_you_prosthodontist, "16. ARE YOU PROSTHODONTIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :are_you_prosthodontist, true, id: "prosthodontist_yes", class: "form-check-input" %>
+                      <%= form.label :are_you_prosthodontist, "Yes", class: "form-check-label", for: "prosthodontist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :are_you_prosthodontist, false, id: "prosthodontist_no", class: "form-check-input" %>
+                      <%= form.label :are_you_prosthodontist, "No", class: "form-check-label", for: "prosthodontist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :are_you_prosthodontist, nil, id: "prosthodontist_na", class: "form-check-input" %>
+                      <%= form.label :are_you_prosthodontist, "N/A", class: "form-check-label", for: "prosthodontist_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+   
+                <div class="mb-3 row px-3">
+                  <%= form.label :is_dental_anesthesiologist, "17. ARE YOU A DENTAL ANESTHESIOLOGIST?", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :is_dental_anesthesiologist, true, id: "dental_anesthesiologist_yes", class: "form-check-input" %>
+                      <%= form.label :is_dental_anesthesiologist, "Yes", class: "form-check-label", for: "dental_anesthesiologist_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :is_dental_anesthesiologist, false, id: "dental_anesthesiologist_no", class: "form-check-input" %>
+                      <%= form.label :is_dental_anesthesiologist, "No", class: "form-check-label", for: "dental_anesthesiologist_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :is_dental_anesthesiologist, nil, id: "dental_anesthesiologist_na", class: "form-check-input" %>
+                      <%= form.label :is_dental_anesthesiologist, "N/A", class: "form-check-label", for: "dental_anesthesiologist_na" %>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Procedures Performed</legend>
+                </div>
+
+                <div class="mb-3 row px-3">
+                  <label class="col-sm-9 col-form-label">18. CONSCIOUS SEDATION?</label>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :conscious_sedation, true, id: "conscious_sedation_yes", class: "form-check-input" %>
+                      <%= form.label :conscious_sedation, "Yes", class: "form-check-label", for: "conscious_sedation_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :conscious_sedation, false, id: "conscious_sedation_no", class: "form-check-input" %>
+                      <%= form.label :conscious_sedation, "No", class: "form-check-label", for: "conscious_sedation_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :conscious_sedation, nil, id: "conscious_sedation_na", class: "form-check-input" %>
+                      <%= form.label :conscious_sedation, "N/A", class: "form-check-label", for: "conscious_sedation_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label class="col-sm-9 col-form-label">19. GENERAL ANESTHESIA/UNCONSCIOUS SEDATION?</label>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :general_anesthesia, true, id: "general_anesthesia_yes", class: "form-check-input" %>
+                      <%= form.label :general_anesthesia, "Yes", class: "form-check-label", for: "general_anesthesia_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :general_anesthesia, false, id: "general_anesthesia_no", class: "form-check-input" %>
+                      <%= form.label :general_anesthesia, "No", class: "form-check-label", for: "general_anesthesia_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :general_anesthesia, nil, id: "general_anesthesia_na", class: "form-check-input" %>
+                      <%= form.label :general_anesthesia, "N/A", class: "form-check-label", for: "general_anesthesia_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label class="col-sm-9 col-form-label">20. (9240) IV SEDATION?</label>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :iv_sedation, true, id: "iv_sedation_yes", class: "form-check-input" %>
+                      <%= form.label :iv_sedation, "Yes", class: "form-check-label", for: "iv_sedation_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :iv_sedation, false, id: "iv_sedation_no", class: "form-check-input" %>
+                      <%= form.label :iv_sedation, "No", class: "form-check-label", for: "iv_sedation_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :iv_sedation, nil, id: "iv_sedation_na", class: "form-check-input" %>
+                      <%= form.label :iv_sedation, "N/A", class: "form-check-label", for: "iv_sedation_na" %>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Board Certification</legend>
+                </div>
+
+                <div class="mb-3 row px-3">
+                  <label class="col-sm-9 col-form-label">21. ARE YOU BOARD CERTIFIED?</label>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :board_certified, true, id: "board_certified_yes", class: "form-check-input" %>
+                      <%= form.label :board_certified, "Yes", class: "form-check-label", for: "board_certified_yes" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :board_certified, false, id: "board_certified_no", class: "form-check-input" %>
+                      <%= form.label :board_certified, "No", class: "form-check-label", for: "board_certified_no" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :board_certified, nil, id: "board_certified_na", class: "form-check-input" %>
+                      <%= form.label :board_certified, "N/A", class: "form-check-label", for: "board_certified_na" %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="board_name" class="col-sm-9 col-form-label">22. IF CERTIFIED, WHICH BOARD?</label>
+                  <div class="col-sm-3">
+                    <%= form.text_field :certifying_board, class: "form-control", id: "certifying_board" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="certification_expiration_date" class="col-sm-9 col-form-label">23. Expiration Date (MM/DD/YYYY)</label>
+                  <div class="col-sm-3">
+                    <%= form.date_field :certification_expiration_date, class: "form-control", id: "certification_expiration_date" %>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Certifications</legend>
+                </div>
+
+                <div class="mb-3 row mt-3 px-3">
+                  <label for="cpr_certificate_number" class="col-sm-9 col-form-label">24. CPR CERTIFICATE NUMBER</label>
+                  <div class="col-sm-3">
+                    <%= form.text_field :cpr_certificate_number, class: "form-control", id: "cpr_certificate_number" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="cpr_effective_date" class="col-sm-9 col-form-label">25. CPR EFFECTIVE DATE (MM/DD/YYYY)</label>
+                  <div class="col-sm-3">
+                    <%= form.date_field :cpr_effective_date, class: "form-control", id: "cpr_effective_date" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="cpr_expiration_date" class="col-sm-9 col-form-label">26. EXPIRATION DATE (MM/DD/YYYY)</label>
+                  <div class="col-sm-3">
+                    <%= form.date_field :cpr_expiration_date, class: "form-control", id: "cpr_expiration_date" %>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Certificate: General Anesthesia / IV Sedation / Conscious Sedation</legend>
+                </div>
+
+                <div class="mb-3 row mt-3 px-3">
+                  <label for="anesthesia_license_number" class="col-sm-9 col-form-label">27. ANESTHESIA LICENSE / PERMIT NUMBER</label>
+                  <div class="col-sm-3">
+                    <%= form.text_field :anesthesia_license_number, class: "form-control", id: "anesthesia_license_number" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="anesthesia_certification_issue_date" class="col-sm-9 col-form-label">28. CERTIFICATION ISSUE DATE (MM/DD/YYYY)</label>
+                  <div class="col-sm-3">
+                    <%= form.date_field :anesthesia_certification_issue_date, class: "form-control", id: "anesthesia_certification_issue_date" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <label for="anesthesia_certification_expiration_date" class="col-sm-9 col-form-label">29. EXPIRATION DATE (MM/DD/YYYY)</label>
+                  <div class="col-sm-3">
+                    <%= form.date_field :anesthesia_certification_expiration_date, class: "form-control", id: "anesthesia_certification_expiration_date" %>
+                  </div>
+                </div>
+                
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Hospital Privileges</legend>
+                </div>
+
+                <div class="mb-3 row px-3 mt-2">
+                  <label class="col-sm-9 col-form-label">30. DO YOU HAVE HOSPITAL PRIVILEGES?</label>
+                  <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                      <%= form.radio_button :has_hospital_privileges, true, class: "form-check-input", id: "has_hospital_privileges_yes" %>
+                      <%= form.label :has_hospital_privileges_yes, "Yes", class: "form-check-label" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 20%;">
+                      <%= form.radio_button :has_hospital_privileges, false, class: "form-check-input", id: "has_hospital_privileges_no" %>
+                      <%= form.label :has_hospital_privileges_no, "No", class: "form-check-label" %>
+                    </div>
+                    <div class="form-check form-check-inline" style="margin-left: 18%;">
+                      <%= form.radio_button :has_hospital_privileges, nil, class: "form-check-input", id: "has_hospital_privileges_na" %>
+                      <%= form.label :has_hospital_privileges_na, "N/A", class: "form-check-label" %>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="border pixel-2">
+                <div class="row grey-head margin-heading">
+                  <legend class="w-auto fs-6 py-1">Hospital Details</legend>
+                </div>
+
+                <div class="mb-3 row mt-3 px-3">
+                  <%= form.label :hospital_name, "31. HOSPITAL 1 NAME", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :hospital_name, class: "form-control", id: "hospital_name" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :street_address, "32. STREET ADDRESS", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :street_address, class: "form-control", id: "street_address" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :city, "33. CITY", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :city, class: "form-control", id: "city" %>
+                  </div>
+                </div>
+                <hr>
+
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :state, "34. STATE", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.select :state, 
+                      options_for_select(['choose one', 'New York', 'California','xyz'], @doctor.state), 
+                      {}, class: 'form-select form-control rounded-0 fw-bold', 
+                      id: 'State' %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :zip, "35. ZIP", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :zip, class: "form-control", id: "zip" %>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="mb-3 row px-3">
+                  <%= form.label :phone, "36. PHONE", class: "col-sm-9 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= form.text_field :phone, class: "form-control", id: "phone" %>
+                  </div>
+                </div>
+              </fieldset>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+</div>
+<style>
+.margin-heading{
+    margin-left:0px;
+    margin-right: 0px;
+  }
+
+.border-direction{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.form-select-state {
+  border-radius: 0.25rem; /* Rounded corners */
+  border: 1px solid #ced4da; /* Custom border color */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transitions */
+}
+
+  
+.list-group-item {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+
+.logo{
+  height: 20%;
+  width: 173px;
+}
+
+.list-group-item.active {
+  background-color: #26408B;
+  color: white;
+  border-radius: 18px;
+  padding: 19px;
+}
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .grey-head{
+    background-color: lightgrey;
+  }
+
+
+  .fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -5px;
+}
+
+input.form-control {
+  border-radius: 0 !important;
+  border:1px solid black;
+}
+
+
+</style>
+<script type="text/javascript">
+
+  function saveAndNavigate(url) {
+  $.ajax({
+    url: '<%= save_doctor_doctor_path(@doctor) %>',  // Corrected PATCH route for saving Doctor data
+    method: 'PATCH',
+    data: $('#personal-form').serialize(),  // Serialize data from the Personal form
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  // Attach CSRF token
+    },
+    success: function() {
+      // Redirect to the specified URL (next tab) on success
+      window.location.href = url;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+</script>
+
